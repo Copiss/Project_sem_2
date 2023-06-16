@@ -90,19 +90,19 @@ public:
     {
         if (player.getPosition().x > m_shape.getPosition().x)
         {
-            m_shape.move(0.01f, 0.f);
+            move(0.01f, 0.f);
         }
         if (player.getPosition().x < m_shape.getPosition().x)
         {
-            m_shape.move(-0.01f, 0.f);
+            move(-0.01f, 0.f);
         }
         if (player.getPosition().y > m_shape.getPosition().y)
         {
-            m_shape.move(0.f, 0.01f);
+            move(0.f, 0.01f);
         }
         if (player.getPosition().y < m_shape.getPosition().y)
         {
-            m_shape.move(0.f, -0.01f);
+            move(0.f, -0.01f);
         }
     }
 
