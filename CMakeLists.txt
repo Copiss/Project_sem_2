@@ -19,7 +19,7 @@ link_directories("ext/SFML/lib/")
 
 add_executable("${PROJECT_NAME}" main.cpp
 		
- "Circle.cpp" "Player.cpp" "Enemy.cpp")
+ Circle.cpp Circle.hpp Enemy.hpp Enemy.cpp Player.hpp Player.cpp)
 											
 target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  sfml-window-s-d

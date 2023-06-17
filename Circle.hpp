@@ -1,25 +1,23 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
-namespace cr
+namespace game
 {
-    // Базовый класс Circle
-    class Circle : public Drawable
-    {
+    class Circle : public sf::Drawable {
     public:
-
-        Circle(float radius = 0.f, Color color = Color::White) : m_shape(radius) {};
+        Circle(float radius = 0.f, sf::Color color = sf::Color::White);
 
         void setPosition(float x, float y);
 
-        Vector2f getPosition() const;
-       
+        sf::Vector2f getPosition() const;
+
         float getRadius() const;
 
-        CircleShape& GetCircle();
+        sf::CircleShape& GetCircle();
 
-        void draw(RenderTarget& target, RenderStates states) const override; // переопределение метода
-            
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
     protected:
-        CircleShape m_shape;
+        sf::CircleShape m_shape;
     };
 }

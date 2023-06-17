@@ -1,12 +1,13 @@
 #pragma once
+#include"Circle.hpp"
 
-namespace en
+namespace game
 {
     // Дочерний класс EnemyCircle
     class EnemyCircle : public Circle
     {
     public:
-        EnemyCircle() : Circle(20.f, Color::Red) {}
+        EnemyCircle();
 
         void move(float x, float y);
 

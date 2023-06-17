@@ -1,34 +1,25 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 #include "Enemy.hpp"
 
-using namespace sf;
-
-namespace en
+namespace game
 {
-    void EnemyCircle::move(float x, float y)
-    {
+    EnemyCircle::EnemyCircle() : Circle(20.f, sf::Color::Red) {}
+
+    void EnemyCircle::move(float x, float y) {
         m_shape.move(x, y);
     }
 
-    void EnemyCircle::followPlayer(const Circle& player)
-    {
-        if (player.getPosition().x > m_shape.getPosition().x)
-        {
-            m_shape.move(0.01f, 0.f);
+    void EnemyCircle::followPlayer(const Circle& player) {
+        if (player.getPosition().x > m_shape.getPosition().x) {
+            move(0.01f, 0.f);
         }
-        if (player.getPosition().x < m_shape.getPosition().x)
-        {
-            m_shape.move(-0.01f, 0.f);
+        if (player.getPosition().x < m_shape.getPosition().x) {
+            move(-0.01f, 0.f);
         }
-        if (player.getPosition().y > m_shape.getPosition().y)
-        {
-            m_shape.move(0.f, 0.01f);
+        if (player.getPosition().y > m_shape.getPosition().y) {
+            move(0.f, 0.01f);
         }
-        if (player.getPosition().y < m_shape.getPosition().y)
-        {
-            m_shape.move(0.f, -0.01f);
+        if (player.getPosition().y < m_shape.getPosition().y) {
+            move(0.f, -0.01f);
         }
     }
 
