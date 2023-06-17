@@ -1,12 +1,13 @@
 #pragma once
+#include"Circle.hpp"
 
-namespace pl
+namespace game
 {
     // Дочерний класс PlayerCircle
     class PlayerCircle : public Circle
     {
     public:
-        PlayerCircle() : Circle(30.f, Color::Green) {}
+        PlayerCircle();
 
         void move(float x, float y);
 

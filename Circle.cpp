@@ -1,39 +1,28 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 #include "Circle.hpp"
 
-using namespace sf;
-
-namespace cr
+namespace game
 {
-    Circle::Circle(float radius = 0.f, Color color = Color::White) : m_shape(radius)
-    {
+    Circle::Circle(float radius, sf::Color color) : m_shape(radius) {
         m_shape.setFillColor(color);
     }
 
-    void Circle::setPosition(float x, float y)
-    {
+    void Circle::setPosition(float x, float y) {
         m_shape.setPosition(x, y);
     }
 
-    Vector2f Circle::getPosition() const
-    {
+    sf::Vector2f Circle::getPosition() const {
         return m_shape.getPosition();
     }
 
-    float Circle::getRadius() const
-    {
+    float Circle::getRadius() const {
         return m_shape.getRadius();
     }
 
-    CircleShape& Circle::GetCircle()
-    {
+    sf::CircleShape& Circle::GetCircle() {
         return m_shape;
     }
 
-    void Circle::draw(RenderTarget& target, RenderStates states) const override // переопределение метода
-    {
+    void Circle::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(m_shape, states);
     }
 }

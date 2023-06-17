@@ -1,11 +1,9 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 #include <iostream>
-#include "Circle.hpp"
 #include "Player.hpp"
 #include "Enemy.hpp"
 
 using namespace sf;
+using namespace game;
 
 int main()
 {
