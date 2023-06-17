@@ -1,9 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Circle.hpp"
+#include "Player.hpp"
+#include "Enemy.hpp"
 
 using namespace sf;
 
+<<<<<<< HEAD
 // Базовый класс Circle
 class Circle : public Drawable
 {
@@ -120,6 +124,8 @@ private:
     float m_growthRate = 5;
 };
 
+=======
+>>>>>>> 5c0c3005eb8e14e89d665bb1b86158bf67d01dc3
 int main()
 {
     // Создаем окно
