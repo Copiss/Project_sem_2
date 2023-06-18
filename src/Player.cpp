@@ -2,7 +2,18 @@
 
 namespace game
 {
-    PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) {}
+    PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) { }
+
+    std::unique_ptr<PlayerCircle> PlayerCircle::instance = nullptr;
+
+    PlayerCircle& PlayerCircle::getInstance() 
+    {
+        if (instance == nullptr)
+        {
+            instance.reset(new PlayerCircle);
+        }
+        return *instance;
+    }
 
     void PlayerCircle::move(float x, float y) {
         m_shape.move(x, y);

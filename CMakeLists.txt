@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15) # Проверка версии CMake.
 									 # Если версия установленой программы
 									 # старее указаной, произайдёт аварийный выход.
 
-set(PROJECT_NAME sfml_sample)				 # имя проекта		 
+set(PROJECT_NAME project)				 # имя проекта		 
 project("${PROJECT_NAME}")
 
 
@@ -15,11 +15,14 @@ add_definitions(-DSFML_STATIC)		 # дефайны
 
 include_directories("ext/SFML/include/")	# добавляем директории
 include_directories("inc/")
+include_directories(includes)
 link_directories("ext/SFML/lib/")	
 
-add_executable("${PROJECT_NAME}" main.cpp
-		
- Circle.cpp Circle.hpp Enemy.hpp Enemy.cpp Player.hpp Player.cpp)
+file(GLOB SOURCES "src/*.cpp") # Добавить все файлы cpp в src-папке в переменную SOURCES
+
+file(GLOB HEADERS "includes/*.hpp") # Добавить все файлы hpp в include-папке в переменную HEADERS
+
+add_executable("${PROJECT_NAME}" ${SOURCES} ${HEADERS}) # Создать исполняемый файл MyProject из исходников
 											
 target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  sfml-window-s-d

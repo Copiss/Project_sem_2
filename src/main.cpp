@@ -11,11 +11,12 @@ int main()
     RenderWindow window(VideoMode(800, 600), "My Game");
 
     // Создаем круги
-    std::unique_ptr<PlayerCircle> player = std::make_unique<PlayerCircle>();
+    PlayerCircle& player = PlayerCircle::getInstance();
+
     std::unique_ptr<EnemyCircle> enemy = std::make_unique<EnemyCircle>();
     Clock clock;
     // Устанавливаем начальную позицию игрока
-    player->setPosition(400.f, 300.f);
+    player.setPosition(400.f, 300.f);
     // Устанавливаем начальную позицию врага
     enemy->setPosition(100.f, 100.f);
 
@@ -31,14 +32,14 @@ int main()
         }
 
         // Управление игроком
-        player->handleInput();
+        player.handleInput();
 
         // Движение врага в сторону игрока
-        enemy->followPlayer(*player);
+        enemy->followPlayer(player);
         enemy->update(clock.restart().asSeconds());
 
         // Проверяем столкновение игрока и врага
-        if (enemy->checkCollision(*player))
+        if (enemy->checkCollision(player))
         {
             std::cout << "Game Over!" << std::endl;
             window.close();
@@ -46,7 +47,7 @@ int main()
 
         // Отрисовываем круги в окне
         window.clear();
-        window.draw(*player);
+        window.draw(player);
         window.draw(*enemy);
         window.display();
     }
