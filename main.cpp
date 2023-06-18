@@ -16,7 +16,6 @@ int main()
     Clock clock;
     // Устанавливаем начальную позицию игрока
     player->setPosition(400.f, 300.f);
-
     // Устанавливаем начальную позицию врага
     enemy->setPosition(100.f, 100.f);
 

@@ -18,7 +18,7 @@ namespace game
         return m_shape.getRadius();
     }
 
-    sf::CircleShape& Circle::GetCircle() {
+    const sf::CircleShape& Circle::GetCircle() {
         return m_shape;
     }
 

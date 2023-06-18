@@ -13,7 +13,7 @@ namespace game
 
         float getRadius() const;
 
-        sf::CircleShape& GetCircle();
+        const sf::CircleShape& GetCircle();
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
