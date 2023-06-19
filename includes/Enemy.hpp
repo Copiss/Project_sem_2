@@ -1,5 +1,6 @@
 #pragma once
 #include"Circle.hpp"
+#include"Player.hpp"
 
 namespace game
 {
@@ -11,14 +12,17 @@ namespace game
 
         void move(float x, float y);
 
-        void followPlayer(const Circle& player);
+        void followPlayer();
 
-        bool checkCollision(Circle& other) const;
+        bool checkCollision();
 
-        void update(float dt);
+        void EndGame(sf::RenderWindow& window);
+
+        void update(float dt, sf::RenderWindow& window);
 
     private:
-        float m_growthRate = 5;
+        static float m_growthRate;
+        static PlayerCircle& target;
     };
 
 }

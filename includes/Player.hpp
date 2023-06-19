@@ -8,12 +8,11 @@ namespace game
     {
     public:
         static PlayerCircle& getInstance();
-
+        void update();
+    private:
         void move(float x, float y);
-
         void handleInput();
 
-    private:
         PlayerCircle(); // конструктор должен быть private
         PlayerCircle(const PlayerCircle&) = delete;
         PlayerCircle& operator=(const PlayerCircle&) = delete;

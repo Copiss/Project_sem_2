@@ -2,7 +2,7 @@
 
 namespace game
 {
-    PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) { }
+    PlayerCircle::PlayerCircle() : Circle(40.f, sf::Color::Green) {}
 
     std::unique_ptr<PlayerCircle> PlayerCircle::instance = nullptr;
 
@@ -32,5 +32,9 @@ namespace game
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             move(0.f, 0.1f);
         }
+    }
+    void PlayerCircle::update()
+    {
+        handleInput();
     }
 }
