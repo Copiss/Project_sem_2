@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Player.hpp"
-#include "Enemy.hpp"
+#include "EnemyManager.hpp"
 
 int main()
 {
@@ -8,12 +8,12 @@ int main()
     // Создаем окно
     sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
     // Создаем круги
+    game::EnemyManager manager(10);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
-    std::unique_ptr<game::EnemyCircle> enemy = std::make_unique<game::EnemyCircle>();
     // Устанавливаем начальную позицию игрока
     player.setPosition(400.f, 300.f);
     // Устанавливаем начальную позицию врага
-    enemy->setPosition(100.f, 100.f);
+    manager.SetRandomPositions(window);
     sf::Clock clock;
     // Основной цикл игры
     while (window.isOpen())
@@ -28,13 +28,13 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        enemy->update(deltaTime, window);
+        manager.update(deltaTime, window);
         player.update();
 
         // Отрисовываем круги в окне
         window.clear();
-        window.draw(*enemy);
         window.draw(player);
+        manager.draw(window);
         window.display();
     }
 

@@ -1,11 +1,21 @@
 #include "Enemy.hpp"
 #include<iostream>
+#include <random>
 
 namespace game
 {
     EnemyCircle::EnemyCircle() : Circle(20.f, sf::Color::Red) {}
 
     float EnemyCircle::m_growthRate = 4;
+
+    void EnemyCircle::SetRandomPosition(EnemyCircle& enemy, sf::RenderWindow& window)
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<float> xDist(0.f, static_cast<float>(window.getSize().x));
+        std::uniform_real_distribution<float> yDist(0.f, static_cast<float>(window.getSize().y));
+        enemy.move(xDist(gen), yDist(gen));
+    }
 
     PlayerCircle& EnemyCircle::GetTarget()
     {
@@ -35,11 +45,10 @@ namespace game
 
     bool EnemyCircle::checkCollision() const
     {
-        float distance = sqrt(pow(getPosition().x - GetTarget().getPosition().x, 2) + pow(getPosition().y - GetTarget().getPosition().y, 2)) - (getRadius() + GetTarget().getRadius());
-        return distance <= 0.f;
+        return m_shape.getGlobalBounds().intersects(GetTarget().GetCircle().getGlobalBounds());
     }
 
-    void EnemyCircle::EndGame(sf::RenderWindow& window)
+    void EnemyCircle::EndCondition(sf::RenderWindow& window)
     {
         if (checkCollision())
         {
@@ -50,7 +59,7 @@ namespace game
     
     void EnemyCircle::update(float dt, sf::RenderWindow& window)
     {
-        EndGame(window);
+        EndCondition(window);
         followPlayer();
         m_shape.setRadius(m_shape.getRadius() + m_growthRate * dt);
     }
