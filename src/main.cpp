@@ -6,7 +6,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
 
-    game::EnemyManager manager(10);
+    game::EnemyManager manager(4);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 
     player.setPosition(400.f, 300.f);
