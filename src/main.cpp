@@ -2,46 +2,39 @@
 #include "Player.hpp"
 #include "Enemy.hpp"
 
-using namespace sf;
-using namespace game;
-
 int main()
 {
+    
     // Создаем окно
-    RenderWindow window(VideoMode(800, 600), "My Game");
-    Clock clock;
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
     // Создаем круги
-    PlayerCircle& player = PlayerCircle::getInstance();
-
-    std::unique_ptr<EnemyCircle> enemy = std::make_unique<EnemyCircle>();
+    game::PlayerCircle& player = game::PlayerCircle::getInstance();
+    std::unique_ptr<game::EnemyCircle> enemy = std::make_unique<game::EnemyCircle>();
     // Устанавливаем начальную позицию игрока
-    player.setPosition(300.f, 300.f);
+    player.setPosition(400.f, 300.f);
     // Устанавливаем начальную позицию врага
     enemy->setPosition(100.f, 100.f);
-
+    sf::Clock clock;
     // Основной цикл игры
     while (window.isOpen())
     {
-        static float deltaTime = clock.getElapsedTime().asSeconds();
+        window.setFramerateLimit(60);
 
+        const float deltaTime = clock.restart().asSeconds();
         // Обрабатываем события в окне
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
                 window.close();
         }
-
-        // Update игрока
-        player.update();
-
-        // Update врага
         enemy->update(deltaTime, window);
+        player.update();
 
         // Отрисовываем круги в окне
         window.clear();
-        window.draw(player);
         window.draw(*enemy);
+        window.draw(player);
         window.display();
     }
 
