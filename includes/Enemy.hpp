@@ -1,24 +1,21 @@
 #pragma once
-#include"Circle.hpp"
+#include"Player.hpp"
 
 namespace game
 {
-    // Дочерний класс EnemyCircle
     class EnemyCircle : public Circle
     {
     public:
         EnemyCircle();
-
-        void move(float x, float y);
-
-        void followPlayer(const Circle& player);
-
-        bool checkCollision(Circle& other) const;
-
-        void update(float dt);
+        static void SetRandomPosition(EnemyCircle& enemy, sf::RenderWindow& window);
+        void update(float dt, sf::RenderWindow& window);
+        bool checkCollision() const;
+        void EndCondition(sf::RenderWindow& window);
 
     private:
-        float m_growthRate = 5;
+        static float m_growthRate;
+        static PlayerCircle& GetTarget();
+        void move(float x, float y);
+        void followPlayer();
     };
-
 }
