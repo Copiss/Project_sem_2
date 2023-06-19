@@ -2,7 +2,7 @@
 #include <iostream>
 namespace game
 {
-    EnemyManager::EnemyManager(int numEnemies)
+    EnemyManager::EnemyManager(size_t numEnemies)
     {
         for (int i = 0; i < numEnemies; ++i) {
             m_enemies.push_back(std::make_unique<EnemyCircle>());

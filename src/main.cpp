@@ -6,12 +6,12 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
 
-    game::EnemyManager manager(4);
+    std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(5);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 
     player.setPosition(400.f, 300.f);
 
-    manager.SetRandomPositions(window);
+    manager->SetRandomPositions(window);
     sf::Clock clock;
 
     while (window.isOpen())
@@ -26,12 +26,12 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        manager.update(deltaTime, window);
+        manager->update(deltaTime, window);
         player.update();
 
         window.clear();
         window.draw(player);
-        manager.draw(window);
+        manager->draw(window);
         window.display();
     }
 

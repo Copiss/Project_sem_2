@@ -5,7 +5,7 @@ namespace game
     class EnemyManager
     {
     public:
-        EnemyManager(int numEnemies);
+        EnemyManager(size_t numEnemies);
         void update(float dt, sf::RenderWindow& window);
         void draw(sf::RenderWindow& window);
         void EndGame(sf::RenderWindow& window);
