@@ -52,8 +52,13 @@ namespace game
     {
         if (checkCollision())
         {
-            std::cout << "Game Over!" << std::endl;
-            window.close();
+            sf::Texture texture;
+            texture.loadFromFile("You_lose.jpg");
+            sf::Sprite sprite(texture);
+            std::cout << "You lose!" << std::endl;
+            window.clear();
+            window.draw(sprite);
+            window.display();
         }
     }
 

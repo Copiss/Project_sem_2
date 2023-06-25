@@ -54,8 +54,13 @@ namespace game
     {
         if (TimerIsOver())
         {
+            sf::Texture texture;
+            texture.loadFromFile("You_win.jpg");
+            sf::Sprite sprite(texture);
             std::cout << "You win!" << std::endl;
-            window.close();
+            window.clear();
+            window.draw(sprite);
+            window.display();
         }
     }
 }

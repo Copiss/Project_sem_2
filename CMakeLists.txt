@@ -39,3 +39,5 @@ target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
         vorbis
         ogg)
         file(COPY "font.ttf" DESTINATION "/")
+ 	file(COPY "You_win.jpg" DESTINATION "/")
+ 	file(COPY "You_lose.jpg" DESTINATION "/")
