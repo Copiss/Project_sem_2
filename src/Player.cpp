@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include<iostream>
 namespace game
 {
     PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) {}
@@ -15,9 +15,10 @@ namespace game
         return *instance;
     }
 
-    void PlayerCircle::update()
+    void PlayerCircle::update(sf::RenderWindow& window)
     {
         handleInput();
+        PlayerWin(window);
     }
 
     void PlayerCircle::move(float x, float y) {
@@ -36,6 +37,25 @@ namespace game
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             move(0.f, 4.f);
+        }
+    }
+    bool PlayerCircle::TimerIsOver()
+    {
+        if (clock.getElapsedTime().asSeconds() >= 15.f)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    void PlayerCircle::PlayerWin(sf::RenderWindow& window)
+    {
+        if (TimerIsOver())
+        {
+            std::cout << "You win!" << std::endl;
+            window.close();
         }
     }
 }

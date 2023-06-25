@@ -29,7 +29,7 @@ int main()
                 window.close();
         }
         manager->update(deltaTime, window);
-        player.update();
+        player.update(window);
         window.clear();
         window.draw(player);
         window.draw(t1.m_seconds);

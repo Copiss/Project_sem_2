@@ -7,14 +7,16 @@ namespace game
     {
     public:
         static PlayerCircle& getInstance();
-        void update();
+        void update(sf::RenderWindow& window);
+        void PlayerWin(sf::RenderWindow& window);
+        bool TimerIsOver();
     private:
         void move(float x, float y);
         void handleInput();
-
+        sf::Clock clock;
         PlayerCircle();
         PlayerCircle(const PlayerCircle&) = delete;
         PlayerCircle& operator=(const PlayerCircle&) = delete;
-        static std::unique_ptr<PlayerCircle> instance;
+        static std::unique_ptr<PlayerCircle> instance; 
     };
 }
