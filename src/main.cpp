@@ -5,7 +5,7 @@
 
 int main()
 {
-    Timer t1(15);
+    game::Timer t1(15);
     sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
 
     std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(3);
