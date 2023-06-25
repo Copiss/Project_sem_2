@@ -4,7 +4,7 @@
 
 namespace game
 {
-    EnemyCircle::EnemyCircle() : Circle(20.f, sf::Color::Red) {}
+    EnemyCircle::EnemyCircle() : Circle(20.f, sf::Color(250, 150, 190)) {}
 
     float EnemyCircle::m_growthRate = 4;
 
@@ -52,19 +52,16 @@ namespace game
     {
         if (checkCollision())
         {
+            PlayerCircle::Setter(true);
             sf::Texture texture;
             texture.loadFromFile("You_lose.jpg");
             sf::Sprite sprite(texture);
-            std::cout << "You lose!" << std::endl;
-            window.clear();
             window.draw(sprite);
-            window.display();
         }
     }
 
     void EnemyCircle::update(float dt, sf::RenderWindow& window)
     {
-        EndCondition(window);
         followPlayer();
         m_shape.setRadius(m_shape.getRadius() + m_growthRate * dt);
     }

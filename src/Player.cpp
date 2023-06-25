@@ -6,6 +6,8 @@ namespace game
 
     std::unique_ptr<PlayerCircle> PlayerCircle::instance = nullptr;
 
+    bool PlayerCircle::endGame = false;
+
     PlayerCircle& PlayerCircle::getInstance()
     {
         if (instance == nullptr)
@@ -18,7 +20,6 @@ namespace game
     void PlayerCircle::update(sf::RenderWindow& window)
     {
         handleInput();
-        PlayerWin(window);
     }
 
     void PlayerCircle::move(float x, float y) {
@@ -39,28 +40,25 @@ namespace game
             move(0.f, 4.f);
         }
     }
-    bool PlayerCircle::TimerIsOver()
+    
+    bool PlayerCircle::Getter()
     {
-        if (clock.getElapsedTime().asSeconds() >= 15.f)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
+        return endGame;
     }
-    void PlayerCircle::PlayerWin(sf::RenderWindow& window)
+    void PlayerCircle::Setter(bool n)
     {
-        if (TimerIsOver())
+         endGame = n;
+    }
+    void PlayerCircle::PlayerWin(sf::RenderWindow& window, Timer& t)
+    {
+        
+        if (t.TimerIsOver())
         {
+            Setter(true);
             sf::Texture texture;
             texture.loadFromFile("You_win.jpg");
             sf::Sprite sprite(texture);
-            std::cout << "You win!" << std::endl;
-            window.clear();
             window.draw(sprite);
-            window.display();
         }
     }
 }

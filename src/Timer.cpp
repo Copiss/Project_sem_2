@@ -10,6 +10,19 @@ namespace game
         m_seconds.setCharacterSize(30);
         m_seconds.setPosition(30.f, 30.f);
     }
+
+    bool Timer::TimerIsOver()
+    {
+        if (m_timer <= 0.f)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     void Timer::update()
     {
         if (clock.getElapsedTime().asSeconds() >= 1.f)
