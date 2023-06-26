@@ -38,8 +38,8 @@ int main()
         window.clear();
 
         window.draw(player);
-        window.draw(t1.m_seconds);
         manager->draw(window);
+        window.draw(t1.m_seconds);
         manager->EndGame(window);
         player.PlayerWin(window, t1);
         window.display();
