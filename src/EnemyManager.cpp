@@ -33,7 +33,7 @@ namespace game
     void EnemyManager::SetRandomPositions(sf::RenderWindow& window)
     {
         for (auto& enemy : m_enemies) {
-            EnemyCircle::SetRandomPosition(*enemy, window);
+            enemy->SetRandomPosition(*enemy, window);
         }
     }
 }

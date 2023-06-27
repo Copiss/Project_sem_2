@@ -52,12 +52,17 @@ namespace game
     {
         if (checkCollision())
         {
-            PlayerCircle::Setter(true);
-            sf::Texture texture;
-            texture.loadFromFile("You_lose.jpg");
-            sf::Sprite sprite(texture);
-            window.draw(sprite);
+            PlayerCircle::SetGameStatus(true);
+            LoseResult(window);
         }
+    }
+
+    void EnemyCircle::LoseResult(sf::RenderWindow& window)
+    {
+        sf::Texture texture;
+        texture.loadFromFile("You_lose.jpg");
+        sf::Sprite sprite(texture);
+        window.draw(sprite);
     }
 
     void EnemyCircle::update(float dt, sf::RenderWindow& window)

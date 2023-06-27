@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include<iostream>
+
 namespace game
 {
     PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) {}
@@ -17,13 +18,29 @@ namespace game
         return *instance;
     }
 
-    void PlayerCircle::update(sf::RenderWindow& window)
+    void PlayerCircle::update()
     {
         handleInput();
     }
 
     void PlayerCircle::move(float x, float y) {
-        m_shape.move(x, y);
+        // Получить размеры окна
+        sf::Vector2u windowSize = sf::Vector2u(1080, 710);
+
+        // Получить текущую позицию круга
+        sf::Vector2f pos = m_shape.getPosition();
+
+        // Вычислить новые координаты круга
+        float newX = pos.x + x;
+        float newY = pos.y + y;
+
+        // Проверить, находится ли круг в пределах окна
+        if (newX - getRadius() >= -1.f * getRadius() && newX + m_shape.getRadius() <= windowSize.x - getRadius() &&
+            newY - getRadius() >= -1.f * getRadius() && newY + m_shape.getRadius() <= windowSize.y - getRadius()) 
+        {
+            // Круг в пределах окна, переместить его
+            m_shape.move(x, y);
+        }
     }
 
     void PlayerCircle::handleInput() {
@@ -41,24 +58,28 @@ namespace game
         }
     }
     
-    bool PlayerCircle::Getter()
+    bool PlayerCircle::GetGameStatus()
     {
         return endGame;
     }
-    void PlayerCircle::Setter(bool n)
+    void PlayerCircle::SetGameStatus(bool n)
     {
          endGame = n;
+    }
+    void PlayerCircle::WinResult(sf::RenderWindow& window)
+    {
+        sf::Texture texture;
+        texture.loadFromFile("You_win.jpg");
+        sf::Sprite sprite(texture);
+        window.draw(sprite);
     }
     void PlayerCircle::PlayerWin(sf::RenderWindow& window, Timer& t)
     {
         
         if (t.TimerIsOver())
         {
-            Setter(true);
-            sf::Texture texture;
-            texture.loadFromFile("You_win.jpg");
-            sf::Sprite sprite(texture);
-            window.draw(sprite);
+            SetGameStatus(true);
+            WinResult(window);
         }
     }
 }
