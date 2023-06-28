@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include<iostream>
+#include<SFML/Audio.hpp>
 
 namespace game
 {
@@ -68,10 +69,18 @@ namespace game
     }
     void PlayerCircle::WinResult(sf::RenderWindow& window)
     {
-        sf::Texture texture;
-        texture.loadFromFile("You_win.jpg");
-        sf::Sprite sprite(texture);
-        window.draw(sprite);
+        // «агрузить текстуру
+        try {
+            sf::Texture texture;
+            if (!texture.loadFromFile("You_win.jpg")) {
+                throw std::runtime_error("Failed to load texture file");
+            }
+            sf::Sprite sprite(texture);
+            window.draw(sprite);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+        }
     }
     void PlayerCircle::PlayerWin(sf::RenderWindow& window, Timer& t)
     {
@@ -80,6 +89,20 @@ namespace game
         {
             SetGameStatus(true);
             WinResult(window);
+
+            // ¬оспроизвести звук
+            try {
+                sf::SoundBuffer buffer;
+                if (!buffer.loadFromFile("Win_sound.wav")) {
+                    throw std::runtime_error("Failed to load sound file");
+                }
+                sf::Sound sound(buffer);
+                sound.play();
+                sf::sleep(sf::seconds(1.5f)); // тут нужно в зависимости от размера звука указать
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
         }
     }
 }

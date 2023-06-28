@@ -1,11 +1,20 @@
 #include "EnemyManager.hpp"
 #include <iostream>
+
 namespace game
 {
     EnemyManager::EnemyManager(size_t numEnemies)
     {
-        for (int i = 0; i < numEnemies; ++i) {
-            m_enemies.push_back(std::make_unique<EnemyCircle>());
+        try {
+            if (numEnemies == 0) {
+                throw std::invalid_argument("Number of enemies should be greater than zero");
+            }
+            for (int i = 0; i < numEnemies; ++i) {
+                m_enemies.push_back(std::make_unique<EnemyCircle>());
+            }
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
         }
     }
 
