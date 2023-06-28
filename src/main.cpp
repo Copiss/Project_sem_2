@@ -23,10 +23,10 @@ int main()
     }
 
     std::unique_ptr<game::Timer> t1 = std::make_unique<game::Timer>(15);
-    std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(3);
+    std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(4);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 
-    player.setPosition(400.f, 300.f);
+    player.setPosition(800.f, 300.f);
     manager->SetRandomPositions(window);
 
     sf::Clock Clock;
@@ -53,8 +53,8 @@ int main()
 
         window.clear();
 
-        window.draw(player);
         manager->draw(window);
+        window.draw(player);
         window.draw(t1->m_seconds);
        
         manager->EndGame(window);                 
