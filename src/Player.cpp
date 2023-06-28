@@ -99,6 +99,7 @@ namespace game
                 sf::Sound sound(buffer);
                 sound.play();
                 sf::sleep(sf::seconds(1.5f)); // тут нужно в зависимости от размера звука указать
+                sound.stop();
             }
             catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
