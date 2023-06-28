@@ -1,6 +1,7 @@
 #include "Enemy.hpp"
-#include<iostream>
+#include <iostream>
 #include <random>
+#include<SFML/Audio.hpp>
 
 namespace game
 {
@@ -52,11 +53,38 @@ namespace game
     {
         if (checkCollision())
         {
-            PlayerCircle::Setter(true);
+            PlayerCircle::SetGameStatus(true);
+            LoseResult(window);
+
+            // Воспроизвести звук
+            try {
+                sf::SoundBuffer buffer;
+                if (!buffer.loadFromFile("Lose_sound.wav")) {
+                    throw std::runtime_error("Failed to load sound file");
+                }
+                sf::Sound sound(buffer);
+                sound.play();
+                sf::sleep(sf::seconds(1.5f));
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
+        }
+    }
+
+    void EnemyCircle::LoseResult(sf::RenderWindow& window)
+    {
+        // Загрузить текстуру
+        try {
             sf::Texture texture;
-            texture.loadFromFile("You_lose.jpg");
+            if (!texture.loadFromFile("You_lose.jpg")) {
+                throw std::runtime_error("Failed to load texture file");
+            }
             sf::Sprite sprite(texture);
             window.draw(sprite);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
         }
     }
 

@@ -2,19 +2,35 @@
 #include "Player.hpp"
 #include "EnemyManager.hpp"
 #include "Timer.hpp"
+#include <SFML/Audio.hpp>
 
 int main()
 {
-    game::Timer t1(15);
-    sf::RenderWindow window(sf::VideoMode(1080,720), "My Game");
+    sf::RenderWindow window(sf::VideoMode(1080, 710), "My Game");
 
+    // Создать объект музыки и загрузить музыкальный файл
+    sf::Music music;
+    try {
+        if (!music.openFromFile("background_music.wav")) {
+            throw std::runtime_error("Failed to load music file");
+        }
+        music.setVolume(50); // Установить громкость в 50%
+        music.setLoop(true); // Установить циклическое воспроизведение
+        music.play(); // Запустить музыку
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    std::unique_ptr<game::Timer> t1 = std::make_unique<game::Timer>(15);
     std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(3);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 
     player.setPosition(400.f, 300.f);
-
     manager->SetRandomPositions(window);
+
     sf::Clock Clock;
+
     window.setFramerateLimit(60);
 
     while (window.isOpen())
@@ -28,20 +44,22 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        if (player.Getter() == false)
+        if (player.GetGameStatus() == false)
         {
-            t1.update();
+            t1->update();
             manager->update(deltaTime, window);
-            player.update(window);
+            player.update();
         }
 
         window.clear();
 
         window.draw(player);
-        window.draw(t1.m_seconds);
         manager->draw(window);
-        manager->EndGame(window);
-        player.PlayerWin(window, t1);
+        window.draw(t1->m_seconds);
+       
+        manager->EndGame(window);                 
+        player.PlayerWin(window, *t1);
+
         window.display();
     }
 

@@ -8,14 +8,15 @@ namespace game
     {
     public:
         static PlayerCircle& getInstance();
-        void update(sf::RenderWindow& window);
+        void update();
         void PlayerWin(sf::RenderWindow& window, Timer& t);
-        static bool Getter();
-        static void Setter(bool n);
+        static bool GetGameStatus();
+        static void SetGameStatus(bool n);
     private:
         static bool endGame;
         void move(float x, float y);
         void handleInput();
+        void WinResult(sf::RenderWindow& window);
         PlayerCircle();
         PlayerCircle(const PlayerCircle&) = delete;
         PlayerCircle& operator=(const PlayerCircle&) = delete;
