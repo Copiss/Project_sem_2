@@ -4,7 +4,7 @@
 
 namespace game
 {
-    PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color::Green) {}
+    PlayerCircle::PlayerCircle() : Circle(30.f, sf::Color(215, 144, 245)) {}
 
     std::unique_ptr<PlayerCircle> PlayerCircle::instance = nullptr;
 
