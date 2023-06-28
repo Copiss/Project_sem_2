@@ -53,18 +53,21 @@ namespace game
     {
         if (checkCollision())
         {
-            PlayerCircle::SetGameStatus(true);
-            LoseResult(window);
-
             // Воспроизвести звук
             try {
+
+                PlayerCircle::SetGameStatus(true);
+                LoseResult(window);
+
                 sf::SoundBuffer buffer;
                 if (!buffer.loadFromFile("Lose_sound.wav")) {
                     throw std::runtime_error("Failed to load sound file");
                 }
-                sf::Sound sound(buffer);
+                static sf::Sound sound(buffer);
+                sound.setVolume(10);
                 sound.play();
-                sf::sleep(sf::seconds(1.5f));
+                sf::sleep(sf::seconds(2));
+                sound.stop();
             }
             catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
