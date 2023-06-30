@@ -13,7 +13,7 @@ namespace game
     {
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_real_distribution<float> xDist(0.f, static_cast<float>(window.getSize().x));
+        std::uniform_real_distribution<float> xDist(0.f, static_cast<float>(window.getSize().x) - 400);
         std::uniform_real_distribution<float> yDist(0.f, static_cast<float>(window.getSize().y));
         enemy.move(xDist(gen), yDist(gen));
     }
@@ -46,25 +46,36 @@ namespace game
 
     bool EnemyCircle::checkCollision() const
     {
-        return m_shape.getGlobalBounds().intersects(GetTarget().GetCircle().getGlobalBounds());
+        sf::Vector2f center1 = getPosition() + sf::Vector2f(getRadius(), getRadius());
+        sf::Vector2f center2 = GetTarget().getPosition() + sf::Vector2f(GetTarget().getRadius(), GetTarget().getRadius());
+
+        float dx = center1.x - center2.x;
+        float dy = center1.y - center2.y;
+        float distance = std::sqrt(dx * dx + dy * dy);
+        float sumRadii = getRadius() + GetTarget().getRadius();
+
+        return distance <= sumRadii;
     }
 
     void EnemyCircle::EndCondition(sf::RenderWindow& window)
     {
         if (checkCollision())
         {
-            PlayerCircle::SetGameStatus(true);
-            LoseResult(window);
-
             // Воспроизвести звук
             try {
+
+                PlayerCircle::SetGameStatus(true);
+                LoseResult(window);
+
                 sf::SoundBuffer buffer;
                 if (!buffer.loadFromFile("Lose_sound.wav")) {
                     throw std::runtime_error("Failed to load sound file");
                 }
-                sf::Sound sound(buffer);
+                static sf::Sound sound(buffer);
+                sound.setVolume(10);
                 sound.play();
-                sf::sleep(sf::seconds(1.5f));
+                sf::sleep(sf::seconds(2));
+                sound.stop();
             }
             catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;

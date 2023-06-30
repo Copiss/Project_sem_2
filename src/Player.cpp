@@ -97,8 +97,11 @@ namespace game
                     throw std::runtime_error("Failed to load sound file");
                 }
                 sf::Sound sound(buffer);
+
+                sound.setVolume(10);
                 sound.play();
                 sf::sleep(sf::seconds(1.5f)); // тут нужно в зависимости от размера звука указать
+                sound.stop();
             }
             catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
