@@ -100,7 +100,7 @@ namespace game
                 static sf::Sound sound(buffer);
                 sound.setVolume(120);
                 sound.play();
-                sf::sleep(sf::seconds(2.0f)); 
+                sf::sleep(sf::seconds(1.7f)); 
                 sound.stop();
             }
             catch (const std::exception& e) {
