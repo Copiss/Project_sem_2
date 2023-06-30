@@ -26,27 +26,27 @@ namespace game
 
     void EnemyCircle::move(float x, float y)
     {
-        m_shape.move(x, y);
+        m_shape->move(x, y);
     }
 
     void EnemyCircle::followPlayer() {
-        if (GetTarget().getPosition().x > m_shape.getPosition().x) {
+        if (GetTarget().getPosition().x > getPosition().x) {
             move(1.f, 0.f);
         }
-        if (GetTarget().getPosition().x < m_shape.getPosition().x) {
+        if (GetTarget().getPosition().x < getPosition().x) {
             move(-1.f, 0.f);
         }
-        if (GetTarget().getPosition().y > m_shape.getPosition().y) {
+        if (GetTarget().getPosition().y > getPosition().y) {
             move(0.f, 1.f);
         }
-        if (GetTarget().getPosition().y < m_shape.getPosition().y) {
+        if (GetTarget().getPosition().y < getPosition().y) {
             move(0.f, -1.f);
         }
     }
 
     bool EnemyCircle::checkCollision() const
     {
-        return m_shape.getGlobalBounds().intersects(GetTarget().GetCircle().getGlobalBounds());
+        return m_shape->getGlobalBounds().intersects(GetTarget().GetCircle().getGlobalBounds());
     }
 
     void EnemyCircle::EndCondition(sf::RenderWindow& window)
@@ -94,6 +94,6 @@ namespace game
     void EnemyCircle::update(float dt, sf::RenderWindow& window)
     {
         followPlayer();
-        m_shape.setRadius(m_shape.getRadius() + m_growthRate * dt);
+        m_shape->setRadius(getRadius() + m_growthRate * dt);
     }
 }

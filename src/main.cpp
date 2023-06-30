@@ -22,7 +22,7 @@ int main()
         std::cerr << "Error: " << e.what() << std::endl;
     }
 
-    std::unique_ptr<game::Timer> t1 = std::make_unique<game::Timer>(15);
+    std::unique_ptr<game::Timer> t1 = std::make_unique<game::Timer>(20);
     std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(3);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 

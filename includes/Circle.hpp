@@ -6,6 +6,8 @@ namespace game
     class Circle : public sf::Drawable {
     public:
         Circle(float radius = 0.f, sf::Color color = sf::Color::White);
+        
+        virtual ~Circle();
 
         void setPosition(float x, float y);
 
@@ -18,6 +20,6 @@ namespace game
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     protected:
-        sf::CircleShape m_shape;
+        std::unique_ptr<sf::CircleShape> m_shape;
     };
 }
