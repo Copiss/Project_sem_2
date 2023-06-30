@@ -14,7 +14,7 @@ int main()
         if (!music.openFromFile("background_music.wav")) {
             throw std::runtime_error("Failed to load music file");
         }
-        music.setVolume(50); // Установить громкость в 50%
+        music.setVolume(30); // Установить громкость в 30%
         music.setLoop(true); // Установить циклическое воспроизведение
         music.play(); // Запустить музыку
     }
