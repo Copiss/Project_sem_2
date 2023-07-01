@@ -13,7 +13,7 @@ namespace game
     {
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_real_distribution<float> xDist(0.f, static_cast<float>(window.getSize().x));
+        std::uniform_real_distribution<float> xDist(0.f, static_cast<float>(window.getSize().x) - 400);
         std::uniform_real_distribution<float> yDist(0.f, static_cast<float>(window.getSize().y));
         enemy.move(xDist(gen), yDist(gen));
     }

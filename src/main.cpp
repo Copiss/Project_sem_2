@@ -26,7 +26,7 @@ int main()
     std::unique_ptr<game::EnemyManager> manager = std::make_unique<game::EnemyManager>(3);
     game::PlayerCircle& player = game::PlayerCircle::getInstance();
 
-    player.setPosition(400.f, 300.f);
+    player.setPosition(800.f, 300.f);
     manager->SetRandomPositions(window);
 
     sf::Clock Clock;
